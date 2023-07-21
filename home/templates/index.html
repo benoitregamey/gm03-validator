@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Geocat Admin Panel
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="mx-5">Swiss Geometadata GM03 checker</h1>
+</div>
+<div id="drop-area" class="container-fluid">
+    <div class="drop-area row h-100 m-5 align-items-center rounded shadow-sm bg-light border-highlight">
+        <div class="col mx-auto">
+            <h5 class="text-center text-muted"><i class="fa-solid fa-cloud-arrow-up fa-2xl"></i></h5>
+            <h5 class="text-center text-muted">Drag and drop your files here</h5>
+            <div class="progress mt-3 d-none">
+                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="md-results" class="container-fluid">
+</div>
+
+{% endblock %}

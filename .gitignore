@@ -86,3 +86,5 @@ GitHub.sublime-settings
 
 # Test files #
 test*/*
+
+# Temporary files #

@@ -12,6 +12,9 @@ def create_app():
         from home.home import home_bp
         app.register_blueprint(home_bp)
 
+        from api.api import api_bp
+        app.register_blueprint(api_bp)
+
         celery_init_app(app)
 
         return app

@@ -14,8 +14,6 @@ $(".drop-area").on('dragleave', function (e) {
     $(".drop-area").css("outline-width", "0px");
 });
 
-var test;
-
 // Function to upload files to the server
 $(".drop-area").on('drop', function (e) {
     e.preventDefault();
@@ -27,49 +25,52 @@ $(".drop-area").on('drop', function (e) {
         return false;
     }
 
-    // we use XMLHttpRequest here instead of fetch, because with the former we can easily implement progress and speed.
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/upload', true);
-
-    // show uploading progress
-    xhr.upload.onprogress = function (event) {
-        if (event.lengthComputable) {
-            // update progress
-            let percent = Math.floor(event.loaded / event.total * 100);
-            $('.progress').removeClass("d-none");
-            $('.progress-bar').css('width', percent + "%");
-            if (percent === 100){
-                $('.progress-bar').text("Validating metadata...");
-
-            } else {
-                $('.progress-bar').text(percent + "%");
-            }
-        }
-    };
-
-    xhr.onload = function() {
-        if (xhr.status != 200) { // analyze HTTP status of the response
-            alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-        } else { // show the result
-
-            setTimeout(function(){
-                $("#drop-area").css("height", "0");
-                $("#drop-area").css("opacity", "0");
-                read_md_results(JSON.parse(xhr.response));
-              }, 500);
-
-        }
-    };
-
-    // send files to server
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    const fd = new FormData();
+    const data = new FormData();
     for (let file of fileList) {
-        fd.append('files', file);
+        data.append('files', file);
     }
 
-    xhr.send(fd);
+    gm03Validate(payload=data)
 });
+
+async function createTask(payload){
+    let response = await fetch('/process', {method: 'POST', body: payload});
+    response = await response.json();
+    return response;
+}
+
+async function getTaskResult(taskUUID) {
+    let response = await fetch('/process/' + taskUUID);
+    let result = await response.json();
+    
+    if (result.progress == "DONE"){
+        $('.progress').removeClass("d-none");
+        $('.progress-bar').css('width', "100%");
+        $('.progress-bar').text("100%");
+        setTimeout(function(){
+                $("#drop-area").css("height", "0");
+                $("#drop-area").css("opacity", "0");
+                read_md_results(result.result);
+              }, 500);
+    }
+    else {
+        $('.progress').removeClass("d-none");
+        $('.progress-bar').css('width', result.progress + "%");
+        $('.progress-bar').text(result.progress + "%");
+    }
+
+    return result;
+}
+
+async function gm03Validate(payload){
+    let response = await createTask(payload);
+    taskUUID = response.uuid;
+
+    let runner = setInterval(async function(){
+        let response = await getTaskResult(taskUUID);
+        if (response.progress == "DONE") clearInterval(runner);
+    }, 500);
+}
 
 function read_md_results(results) {
 

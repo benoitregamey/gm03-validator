@@ -1,7 +1,5 @@
 from celery import shared_task
-from werkzeug.datastructures import FileStorage
-import api.gm03_validator
-import time
+from api.gm03_validator import gm03_validator
 
 @shared_task(bind=True)
 def validate(self, files: list):
@@ -12,8 +10,7 @@ def validate(self, files: list):
     progress = 0
 
     for file in files:
-        time.sleep(0.5)
-        result.append(api.gm03_validator.validate(file))
+        result.append(gm03_validator.validate(file))
 
         progress += 1
         self.update_state(state='RUNNING',

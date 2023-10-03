@@ -1,0 +1,10 @@
+__pycache__
+.git
+.dockerignore
+.venv
+schxslt-1.5.2
+schxslt*
+test-files
+test*
+process_schematron.py
+*.md

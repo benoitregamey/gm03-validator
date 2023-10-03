@@ -36,3 +36,14 @@ And finally run the application (within the virtual environment)
 python app.py
 ```
 Then visist http://localhost:5000
+
+## Run with Docker
+Clone the repo and build and run containers with docker compose
+```
+git clone https://github.com/benoitregamey/gm03-validator.git
+
+cd gm03-validator
+
+docker-compose up --build
+```
+Then visist http://localhost:5000

@@ -33,3 +33,27 @@ body{
     box-shadow: 0 0 10px rgb(255, 0, 102);
     color: rgb(160, 3, 66);
 }
+
+.md-notvalid .md-result-header{
+    cursor: pointer;
+}
+
+.md-result-error{
+    transition: max-height 0.5s;
+}
+
+.md-result-error-folded{
+    max-height: 0px;
+    overflow-y: hidden;
+}
+
+.md-result-error-unfolded{
+    max-height: 500px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.md-result-error-unfolded::-webkit-scrollbar {
+    display: none;
+  }

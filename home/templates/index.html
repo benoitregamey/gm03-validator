@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Geocat Admin Panel
+    GM03 Validator
 {% endblock %}
 
 {% block content %}
@@ -12,8 +12,11 @@
 <div id="drop-area" class="container-fluid">
     <div class="drop-area row h-100 m-5 align-items-center rounded shadow-sm bg-light border-highlight">
         <div class="col mx-auto">
-            <h5 class="text-center text-muted"><i class="fa-solid fa-cloud-arrow-up fa-2xl"></i></h5>
-            <h5 class="text-center text-muted">Drag and drop your XML files here</h5>
+            <h5 class="text-center text-muted mb-3"><i class="fa-solid fa-cloud-arrow-up fa-2xl"></i></h5>
+            <h5 class="text-center text-muted">
+                Drag and drop your metadata in XML ISO19139.che files here<br>-<br>
+                or use the <a href="{{ url_for('home.static',filename='redoc-static.html') }}" target="_blank">API</a>
+            </h5>
             <div class="progress mt-3 d-none">
                 <div class="progress-bar bg-info progress-bar-striped progress-bar-animated"></div>
             </div>

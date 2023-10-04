@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: GM03 Validator API
+  description: >-
+    A RESTful API implementation to validate XML metadata against the swiss
+    geographic metadata profile (ISO19139.che).
+    
+    
+    This is implemented as asynchronous task. Multiple validation tasks can be started in parallel without having to wait for them to complete. The task status (and results when done) can be asked with the task UUID.
+  version: 1.0.0
+servers:
+  - url: https://localhost:5000
+paths:
+  /process:
+    post:
+      tags:
+        - process
+      summary: Upload metadata and start validation
+      description: >-
+        Upload metadata in XML (following the ISO19139.che profile) and start a
+        validation process. Returns the task UUID.
+      requestBody:
+        description: Upload metadata and create validation task
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                filename:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              examples:
+                example:
+                  value: {
+                    uuid: 3bd05dc2-ec8a-4c2b-84ac-72856321e752
+                  }
+
+  /process/{taskUuid}:
+    get:
+      tags:
+        - process
+      summary: Get validation task status
+      description: >-
+        Get validation task status. Returns the progress in percentage and empty result when the task is running. Returns progress = "DONE" and the result when the task is over.
+      parameters:
+        - in: path
+          name: taskUuid
+          schema:
+            type: string
+          required: true
+          description: Task UUID (given by process POST request)
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              examples:
+                task running:
+                  value: {
+                    state: RUNNING,
+                    progress: 45,
+                    result:
+                  }
+                task done:
+                  value: {
+                    state: SUCCESS,
+                    progress: DONE,
+                    result:[
+                        {
+                        uuid: metadata UUID,
+                        title: metadata title,
+                        valid: yes,
+                        errors: []
+                        },
+                        {
+                        uuid: metadata UUID,
+                        title: metadata title,
+                        valid: no,
+                        errors: [
+                          error1,
+                          error2,
+                          error3
+                          ]
+                        }
+                      ]
+                  }

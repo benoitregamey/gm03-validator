@@ -112,7 +112,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">not($emptyModelType)</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M101</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M101"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="not($emptyModelType)">
@@ -191,7 +191,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">not($emptyTitle)</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M103</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M103"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="not($emptyTitle)">
@@ -232,7 +232,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$legalTopicCategory</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M104</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M104"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$legalTopicCategory">
@@ -271,7 +271,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">($code  = '' or $code  = 'CH' or $code  = 'LI' or $code  = 'DE' or $code  = 'FR' or $code  = 'IT' or $code  = 'AT')</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M105</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M105"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="($code  = '' or $code  = 'CH' or $code  = 'LI' or $code  = 'DE' or $code  = 'FR' or $code  = 'IT' or $code  = 'AT')">

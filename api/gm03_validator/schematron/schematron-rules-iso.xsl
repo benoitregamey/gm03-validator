@@ -72,7 +72,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">(normalize-space(gco:CharacterString) = '') and (not(@gco:nilReason) or not(contains('inapplicable missing template unknown withheld',@gco:nilReason)))</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M6.characterString</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M6.characterString"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e23" select="node() | @*"/>
@@ -97,7 +97,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">not(@srsDimension) or @srsName</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M6.directPosition</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M6.directPosition"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:if test="not(@axisLabels) or @srsName">
@@ -108,7 +108,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">not(@axisLabels) or @srsName</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M7.axisAndSrs</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M7.axisAndSrs"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:if test="not(@uomLabels) or @srsName">
@@ -119,7 +119,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">not(@uomLabels) or @srsName</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M7.uomAndSrs</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M7.uomAndSrs"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:if test="(not(@uomLabels) and not(@axisLabels)) or (@uomLabels and @axisLabels)">
@@ -130,7 +130,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">(not(@uomLabels) and not(@axisLabels)) or (@uomLabels and @axisLabels)</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M7.uomAndAxis</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M7.uomAndAxis"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e34" select="node() | @*"/>
@@ -156,7 +156,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$count &gt; 0</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M8</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M8"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$count &gt; 0">
@@ -317,7 +317,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$extent</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M11</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M11"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$extent">
@@ -328,7 +328,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$extent</xsl:attribute>
-            <svrl:text>$loc/strings/report.M11</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M11"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e159" select="node() | @*"/>
@@ -354,7 +354,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptyStatement = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M13</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M13"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$emptyStatement = false()">
@@ -365,7 +365,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptyStatement = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M13</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M13"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e177" select="node() | @*"/>
@@ -392,7 +392,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptySource = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M14</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M14"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$emptySource = false()">
@@ -403,7 +403,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptySource = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M14</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M14"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:if test="not($emptyProcessStep = false())">
@@ -414,7 +414,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptyProcessStep = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M15</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M15"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$emptyProcessStep = false()">
@@ -425,7 +425,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$emptyProcessStep = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M15</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M15"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e196" select="node() | @*"/>
@@ -451,7 +451,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$noReportNorLineage = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M16</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M16"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$noReportNorLineage = false()">
@@ -462,7 +462,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$noReportNorLineage = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M16</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M16"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e223" select="node() | @*"/>
@@ -488,7 +488,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$levelDesc</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M17</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M17"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$levelDesc">
@@ -528,7 +528,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$density = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M18</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M18"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$density = false()">
@@ -570,7 +570,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$count</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M19</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M19"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$count">
@@ -610,7 +610,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$count</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M20</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M20"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$count">
@@ -621,7 +621,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$count</xsl:attribute>
-            <svrl:text>$loc/strings/report.M20</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M20"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e310" select="node() | @*"/>
@@ -647,7 +647,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$extent = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M21</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M21"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$extent = false()">
@@ -658,7 +658,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$extent = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M21</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M21"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e329" select="node() | @*"/>
@@ -684,7 +684,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$topic = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M6</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M6"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$topic = false()">
@@ -721,7 +721,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">gmd:aggregateDataSetName or gmd:aggregateDataSetIdentifier</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M23</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M23"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="gmd:aggregateDataSetName or gmd:aggregateDataSetIdentifier">
@@ -732,7 +732,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">gmd:aggregateDataSetName or gmd:aggregateDataSetIdentifier</xsl:attribute>
-            <svrl:text>$loc/strings/report.M23</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M23"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e368" select="node() | @*"/>
@@ -771,7 +771,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">(gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelist'     or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='enumeration'      or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelistElement')      or (gmd:obligation and ((normalize-space(gmd:obligation) != '')       or (gmd:obligation/gmd:MD_ObligationCode)      or (gmd:obligation/@gco:nilReason and contains('inapplicable missing template unknown withheld',gmd:obligation/@gco:nilReason))))</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M26.obligation</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M26.obligation"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="not((gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelist'     or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='enumeration'      or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelistElement')      or (gmd:maximumOccurrence and ((normalize-space(gmd:maximumOccurrence) != '')       or (normalize-space(gmd:maximumOccurrence/gco:CharacterString) != '')      or (gmd:maximumOccurrence/@gco:nilReason and contains('inapplicable missing template unknown withheld',gmd:maximumOccurrence/@gco:nilReason)))))">
@@ -782,7 +782,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">(gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelist'     or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='enumeration'      or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelistElement')      or (gmd:maximumOccurrence and ((normalize-space(gmd:maximumOccurrence) != '')       or (normalize-space(gmd:maximumOccurrence/gco:CharacterString) != '')      or (gmd:maximumOccurrence/@gco:nilReason and contains('inapplicable missing template unknown withheld',gmd:maximumOccurrence/@gco:nilReason))))</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M26.maximumOccurence</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M26.maximumOccurence"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="not((gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelist'     or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='enumeration'      or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelistElement')      or (gmd:domainValue and ((normalize-space(gmd:domainValue) != '')       or (normalize-space(gmd:domainValue/gco:CharacterString) != '')      or (gmd:domainValue/@gco:nilReason and contains('inapplicable missing template unknown withheld',gmd:domainValue/@gco:nilReason)))))">
@@ -793,7 +793,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">(gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelist'     or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='enumeration'      or gmd:dataType/gmd:MD_DatatypeCode/@codeListValue='codelistElement')      or (gmd:domainValue and ((normalize-space(gmd:domainValue) != '')       or (normalize-space(gmd:domainValue/gco:CharacterString) != '')      or (gmd:domainValue/@gco:nilReason and contains('inapplicable missing template unknown withheld',gmd:domainValue/@gco:nilReason))))</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M26.domainValue</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M26.domainValue"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:apply-templates mode="d5e403" select="node() | @*"/>
@@ -860,7 +860,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$domain = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M28</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M28"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$domain = false()">
@@ -871,7 +871,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$domain = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M28</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M28"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e445" select="node() | @*"/>
@@ -897,7 +897,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$shortName = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M29</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M29"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$shortName = false()">
@@ -908,7 +908,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$shortName = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M29</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M29"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e463" select="node() | @*"/>
@@ -934,7 +934,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$cpd = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M30</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M30"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$cpd = false()">
@@ -945,7 +945,7 @@
          </xsl:variable>
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$cpd = false()</xsl:attribute>
-            <svrl:text>$loc/strings/report.M30</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/report.M30"/></svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates mode="d5e483" select="node() | @*"/>
@@ -972,7 +972,7 @@
          </xsl:variable>
          <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" location="{normalize-space($location)}">
             <xsl:attribute name="test">$hl = false()</xsl:attribute>
-            <svrl:text>$loc/strings/alert.M61</svrl:text>
+            <svrl:text><xsl:value-of select="$loc/strings/alert.M61"/></svrl:text>
          </svrl:failed-assert>
       </xsl:if>
       <xsl:if test="$hl = false()">

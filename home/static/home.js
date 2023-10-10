@@ -14,7 +14,27 @@ $(".drop-area").on('dragleave', function (e) {
     $(".drop-area").css("outline-width", "0px");
 });
 
-// Function to upload files to the server
+$(".drop-area").click(function(){
+    $("#file-browser").click();
+});
+
+// Function to upload files to the server via file browser
+$("#file-browser").change(function(){
+
+    const fileList = $(this).get(0).files;
+    if (fileList.length == 0) {
+        return false;
+    }
+
+    const data = new FormData();
+    for (let file of fileList) {
+        data.append('files', file);
+    }
+
+    gm03Validate(payload=data)
+});
+
+// Function to upload files to the server via drag and drop
 $(".drop-area").on('drop', function (e) {
     e.preventDefault();
 
@@ -135,3 +155,8 @@ function read_md_results(results) {
 
   }
 
+// Prevent click event of <a> href to be propagated to the entire
+// drop area
+$("#drop-area a").click(function(e){
+    e.stopPropagation();
+});

@@ -19,7 +19,7 @@ services:
   worker:
     build:
       context: "."
-    command: celery -A app.celery_app worker --loglevel INFO
+    command: celery -A app.celery_app worker --loglevel INFO --max-tasks-per-child=1
     depends_on:
       - "redis"
     networks:

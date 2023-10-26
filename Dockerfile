@@ -19,4 +19,4 @@ RUN pip install gunicorn
 
 EXPOSE 5000
 
-CMD ["gunicorn", "__init__:create_app()"]
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "__init__:create_app()"]

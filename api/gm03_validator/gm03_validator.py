@@ -36,12 +36,15 @@ def validate(metadata: bytes) -> dict:
     }
 
     # Validate with XSD schema
-    try:
-        XSD.assertValid(tree)
+    if not XSD.validate(tree):
 
-    except Exception as error:
         result["valid"] = "no"
-        result["errors"].append(str(error))
+
+        for error in XSD.error_log:
+            result["errors"].append({
+                "message": error.message,
+                "location": f"line {error.line}, {error.path}"
+            })
 
     # Validate with schematron
     with PySaxonProcessor(license=False) as proc:
@@ -73,6 +76,9 @@ def validate(metadata: bytes) -> dict:
                 except IndexError:
                     msg = ""
 
-                result["errors"].append(f"{msg} Location : {location}")
+                result["errors"].append({
+                    "message": msg,
+                    "location": location
+                })
 
     return result

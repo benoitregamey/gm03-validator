@@ -1,3 +1,4 @@
+import re
 from io import BytesIO
 from lxml import etree as ET
 from api.gm03_validator import config
@@ -42,7 +43,7 @@ def validate(metadata: bytes) -> dict:
 
         for error in XSD.error_log:
             result["errors"].append({
-                "message": error.message,
+                "message": re.sub("\s+", " ", error.message),
                 "location": f"line {error.line}, {error.path}"
             })
 
@@ -72,12 +73,12 @@ def validate(metadata: bytes) -> dict:
 
                 try:
                     msg = error.xpath(".//svrl:text/text()",
-                                      namespaces=config.NS)[0].strip()
+                                      namespaces=config.NS)[0]
                 except IndexError:
                     msg = ""
 
                 result["errors"].append({
-                    "message": msg,
+                    "message": re.sub("\s+", " ", msg.strip()),
                     "location": location
                 })
 

@@ -138,8 +138,12 @@ function read_md_results(results) {
 
             for (let err_idx = 0; err_idx < results[i].errors.length; err_idx++) {
 
-                errors.append('<p class="text-break"></p>');
-                errors.children("p").last().text(results[i].errors[err_idx]);
+                errors.append('<p class="text-break mb-1"></p>');
+                errors.children("p").last().text(results[i].errors[err_idx].message);
+                errors.append('<p class="text-break text-dark"></p>');
+                errors.children("p").last().text(
+                    "Location : " + results[i].errors[err_idx].location
+                );
 
                 // Add hr only if not last error
                 if (err_idx != results[i].errors.length -1){

@@ -5,7 +5,7 @@
     }, false);
 });
 
-// Deal dragiing over effect
+// Deal draging over effect
 $(".drop-area").on('dragenter', function (e) {
     $(".drop-area").css("outline-width", "1px");
 });
@@ -15,7 +15,9 @@ $(".drop-area").on('dragleave', function (e) {
 });
 
 $(".drop-area").click(function(){
-    $("#file-browser").click();
+    if ($("#drop-area").css("height") != '0px'){
+        $("#file-browser").click();
+    }
 });
 
 // Function to upload files to the server via file browser
@@ -36,21 +38,24 @@ $("#file-browser").change(function(){
 
 // Function to upload files to the server via drag and drop
 $(".drop-area").on('drop', function (e) {
-    e.preventDefault();
 
-    $(".drop-area").css("outline-width", "0px");
+    if ($("#drop-area").css("height") != '0px'){
+        e.preventDefault();
 
-    const fileList = e.originalEvent.dataTransfer.files; // the files to be uploaded
-    if (fileList.length == 0) {
-        return false;
+        $(".drop-area").css("outline-width", "0px");
+    
+        const fileList = e.originalEvent.dataTransfer.files; // the files to be uploaded
+        if (fileList.length == 0) {
+            return false;
+        }
+    
+        const data = new FormData();
+        for (let file of fileList) {
+            data.append('files', file);
+        }
+    
+        gm03Validate(payload=data)
     }
-
-    const data = new FormData();
-    for (let file of fileList) {
-        data.append('files', file);
-    }
-
-    gm03Validate(payload=data)
 });
 
 async function createTask(payload){

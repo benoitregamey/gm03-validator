@@ -15,7 +15,8 @@ $(".drop-area").on('dragleave', function (e) {
 });
 
 $(".drop-area").click(function(){
-    if ($("#drop-area").css("height") != '0px'){
+    if ($("#drop-area").css("height") != '0px' &&
+        $(".spinner-border").hasClass("d-none")){
         $("#file-browser").click();
     }
 });
@@ -39,7 +40,8 @@ $("#file-browser").change(function(){
 // Function to upload files to the server via drag and drop
 $(".drop-area").on('drop', function (e) {
 
-    if ($("#drop-area").css("height") != '0px'){
+    if ($("#drop-area").css("height") != '0px' && 
+        $(".spinner-border").hasClass("d-none")){
         e.preventDefault();
 
         $(".drop-area").css("outline-width", "0px");
@@ -58,43 +60,19 @@ $(".drop-area").on('drop', function (e) {
     }
 });
 
-async function createTask(payload){
-    let response = await fetch('/process', {method: 'POST', body: payload});
-    response = await response.json();
-    return response;
-}
-
-async function getTaskResult(taskUUID) {
-    let response = await fetch('/process/' + taskUUID);
-    let result = await response.json();
-    
-    if (result.progress == "DONE"){
-        $('.progress').removeClass("d-none");
-        $('.progress-bar').css('width', "100%");
-        $('.progress-bar').text("100%");
-        setTimeout(function(){
-                $("#drop-area").css("height", "0");
-                $("#drop-area").css("opacity", "0");
-                read_md_results(result.result);
-              }, 500);
-    }
-    else {
-        $('.progress').removeClass("d-none");
-        $('.progress-bar').css('width', result.progress + "%");
-        $('.progress-bar').text(result.progress + "%");
-    }
-
-    return result;
-}
 
 async function gm03Validate(payload){
-    let response = await createTask(payload);
-    taskUUID = response.uuid;
+    $('.spinner-border').removeClass('d-none');
+    $("#drop-area .text-center:eq(0)").addClass("d-none")
+    $("#drop-area .text-center:eq(1)").html("Validation in progress... Please wait")
 
-    let runner = setInterval(async function(){
-        let response = await getTaskResult(taskUUID);
-        if (response.progress == "DONE") clearInterval(runner);
-    }, 500);
+    let response = await fetch('/api/validate', {method: 'POST', body: payload});
+    result = await response.json();
+
+    $("#drop-area").css("height", "0");
+    $("#drop-area").css("opacity", "0");
+
+    read_md_results(result);
 }
 
 function read_md_results(results) {

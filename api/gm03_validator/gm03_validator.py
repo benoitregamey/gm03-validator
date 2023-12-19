@@ -1,3 +1,4 @@
+import re
 from io import BytesIO
 from lxml import etree as ET
 from api.gm03_validator import config
@@ -36,12 +37,15 @@ def validate(metadata: bytes) -> dict:
     }
 
     # Validate with XSD schema
-    try:
-        XSD.assertValid(tree)
+    if not XSD.validate(tree):
 
-    except Exception as error:
         result["valid"] = "no"
-        result["errors"].append(str(error))
+
+        for error in XSD.error_log:
+            result["errors"].append({
+                "message": re.sub("\s+", " ", error.message),
+                "location": f"line {error.line}, {error.path}"
+            })
 
     # Validate with schematron
     with PySaxonProcessor(license=False) as proc:
@@ -69,10 +73,13 @@ def validate(metadata: bytes) -> dict:
 
                 try:
                     msg = error.xpath(".//svrl:text/text()",
-                                      namespaces=config.NS)[0].strip()
+                                      namespaces=config.NS)[0]
                 except IndexError:
                     msg = ""
 
-                result["errors"].append(f"{msg} Location : {location}")
+                result["errors"].append({
+                    "message": re.sub("\s+", " ", msg.strip()),
+                    "location": location
+                })
 
     return result

@@ -85,9 +85,14 @@ paths:
                         title: metadata title,
                         valid: no,
                         errors: [
-                          error1,
-                          error2,
-                          error3
+                          {
+                          message: error 1 message,
+                          location: error 1 location
+                          },
+                          {
+                          message: error 2 message,
+                          location: error 2 location
+                          }
                           ]
                         }
                       ]

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    GM03 Validator
+{% endblock %}
+
+{% block content %}
+
+<div class="container login-container">
+    <div class="row justify-content-center h-100 align-items-center">
+        <div class="col-sm-7 col-lg-4 p-0">
+            <div class="login-wrap px-3 py-5">
+                <h3 class="text-center mb-2">Welcome</h3>
+                <p class="text-center text-muted mb-5">Log in by entering your username and password from geocat.ch</p>
+                <form action="#" class="login-form">
+                    <div class="input-group mb-3">
+                        <div class="input-group-text bg-transparent border-bottom border-info"><i class="fa fa-user"></i></div>
+                        <input type="text" class="form-control border-bottom border-info" placeholder="Username" required>
+                    </div>
+                    <div class="input-group mb-5">
+                        <div class="input-group-text bg-transparent border-bottom border-info"><i class="fa fa-lock"></i></div>
+                        <input type="password" class="form-control border-bottom border-info" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn form-control btn-info rounded submit px-3">
+                            Log in
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

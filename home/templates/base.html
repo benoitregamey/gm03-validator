@@ -9,10 +9,14 @@
     <link href="https://fonts.cdnfonts.com/css/dosis" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('home.static',filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('login.static',filename='login.css') }}">
 
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand">GM03 Validator</a>
+    </nav>
     {% block content %} {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

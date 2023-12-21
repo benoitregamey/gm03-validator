@@ -1,0 +1,8 @@
+.input-group-text, .form-control{
+    border: 0;
+    border-radius: 0;
+}
+
+.login-container {
+    height: 70vh;
+}

@@ -11,14 +11,14 @@ info:
 servers:
   - url: https://localhost:5000
 paths:
-  /process:
+  /api/validate:
     post:
       tags:
-        - process
+        - validate
       summary: Upload metadata and start validation
       description: >-
         Upload metadata in XML (following the ISO19139.che profile) and start a
-        validation process. Returns the task UUID.
+        validation process. Returns the metadata uuid, title, validation status and errors if any.
       requestBody:
         description: Upload metadata and create validation task
         content:
@@ -26,7 +26,7 @@ paths:
             schema:
               type: object
               properties:
-                filename:
+                files:
                   type: array
                   items:
                     type: string
@@ -38,42 +38,9 @@ paths:
           content:
             application/json:
               examples:
-                example:
-                  value: {
-                    uuid: 3bd05dc2-ec8a-4c2b-84ac-72856321e752
-                  }
-
-  /process/{taskUuid}:
-    get:
-      tags:
-        - process
-      summary: Get validation task status
-      description: >-
-        Get validation task status. Returns the progress in percentage and empty result when the task is running. Returns progress = "DONE" and the result when the task is over.
-      parameters:
-        - in: path
-          name: taskUuid
-          schema:
-            type: string
-          required: true
-          description: Task UUID (given by process POST request)
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              examples:
-                task running:
-                  value: {
-                    state: RUNNING,
-                    progress: 45,
-                    result:
-                  }
-                task done:
-                  value: {
-                    state: SUCCESS,
-                    progress: DONE,
-                    result:[
+                validation Successful:
+                  value: 
+                      [
                         {
                         uuid: metadata UUID,
                         title: metadata title,
@@ -96,4 +63,3 @@ paths:
                           ]
                         }
                       ]
-                  }

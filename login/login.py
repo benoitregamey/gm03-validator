@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 import requests
-import time
 
 login_bp = Blueprint('login', __name__, template_folder='templates',
     static_folder='static', static_url_path='/static/login')

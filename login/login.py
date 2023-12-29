@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request
 import requests
 
 login_bp = Blueprint('login', __name__, template_folder='templates',
@@ -30,16 +30,15 @@ def login():
             r.raise_for_status()
 
         except Exception:
-            flash("Wrong username or password", "danger")
+            return {}, 403
 
         else:
             if r.status_code == 200:
                 if r.json()["profile"] == "Administrator":
-                    return redirect(url_for("home.index"))
+                    return {"login": "successful"}, 200
                 else:
-                    flash("You must have an Administrator profile to log in",
-                            "danger")
+                    return {}, 401
             else:
-                flash("Wrong username or password", "danger")
+                return {}, 403
 
     return render_template('login.html')

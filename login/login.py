@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import set_access_cookies
 import requests
 
 login_bp = Blueprint('login', __name__, template_folder='templates',
@@ -35,7 +37,10 @@ def login():
         else:
             if r.status_code == 200:
                 if r.json()["profile"] == "Administrator":
-                    return {"login": "successful"}, 200
+                    response = jsonify({"login": "successful"})
+                    access_token = create_access_token(identity=username)
+                    set_access_cookies(response, access_token)
+                    return response, 200
                 else:
                     return {}, 401
             else:

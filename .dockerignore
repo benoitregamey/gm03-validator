@@ -3,8 +3,14 @@ __pycache__
 .dockerignore
 .venv
 schxslt-1.5.2
+schxslt-1.5.2/
+schemas/
+schemas
 schxslt*
 test-files
 test*
+test-files/
+test*/
 process_schematron.py
 *.md
+*.yml

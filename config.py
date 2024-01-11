@@ -2,6 +2,6 @@ import os
 
 
 class FlaskConfig:
-    ENV = os.environ.get("ENV", "development")
-    DEBUG = os.environ.get("DEBUG", "True") == "True"
-    SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(24))
+    ENV = os.environ.get("FLASK_ENV", "production")
+    DEBUG = os.environ.get("FLASK_DEBUG", False)
+    SECRET_KEY = os.environ.get("FLASK_SECRET_KEY", os.urandom(24))

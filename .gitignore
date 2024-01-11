@@ -87,8 +87,7 @@ GitHub.sublime-settings
 # Test files #
 test*/*
 
-# schemas and schxslt
-schemas/
+# schxslt
 schxslt*/
 
 # Temporary files #

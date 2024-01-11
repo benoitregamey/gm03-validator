@@ -13,7 +13,7 @@ with PySaxonProcessor(license=False) as proc:
     for schematron in config.SCHEMATRON:
 
         xsltproc.transform_to_file(
-            source_file = f"schemas/iso19139.che/src/main/plugin/iso19139.che/schematron/{schematron}.sch",
+            source_file = f"api/gm03_validator/schemas/iso19139.che/src/main/plugin/iso19139.che/schematron/{schematron}.sch",
             stylesheet_file = "schxslt-1.5.2/1.0/compile-for-svrl.xsl",
             output_file = f"api/gm03_validator/schematron/{schematron}.xsl"
         )
@@ -24,7 +24,7 @@ for schematron in config.SCHEMATRON:
     # Copy the localization file used by schematron 
     # and paste them in schematron folder of gm03_validator module
     shutil.copy(
-        f"schemas/iso19139.che/src/main/plugin/iso19139.che/loc/eng/{schematron}.xml",
+        f"api/gm03_validator/schemas/iso19139.che/src/main/plugin/iso19139.che/loc/eng/{schematron}.xml",
         "api/gm03_validator/schematron"
     )
 

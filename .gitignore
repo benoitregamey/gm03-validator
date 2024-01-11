@@ -91,3 +91,8 @@ test*/*
 schxslt*/
 
 # Temporary files #
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

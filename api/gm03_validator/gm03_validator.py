@@ -2,7 +2,6 @@ import re
 from io import BytesIO
 from lxml import etree as ET
 from api.gm03_validator import config
-from saxonche import PySaxonProcessor
 
 XSD = ET.parse("api/gm03_validator/schemas/iso19139.che/src/main/plugin/iso19139.che/schema.xsd")
 XSD = ET.XMLSchema(XSD)
@@ -48,38 +47,29 @@ def validate(metadata: bytes) -> dict:
             })
 
     # Validate with schematron
-    with PySaxonProcessor(license=False) as proc:
+    for schematron in config.SCHEMATRON:
 
-        xsltproc = proc.new_xslt30_processor()
-        xsltproc.set_cwd(".")
-        document = proc.parse_xml(xml_text=metadata.decode("utf-8"))
+        xslt_tree = ET.parse(f"api/gm03_validator/schematron/{schematron}.xsl")
+        transform = ET.XSLT(xslt_tree)
+        report = transform(tree)
 
-        for schematron in config.SCHEMATRON:
+        for error in report.xpath(".//svrl:failed-assert", namespaces=config.NS):
+            result["valid"] = "no"
 
-            executable = xsltproc.compile_stylesheet(
-                stylesheet_file=f"api/gm03_validator/schematron/{schematron}.xsl"
-                )
+            if "location" in error.attrib.keys():
+                location = error.attrib["location"]
+            else:
+                location = ""
 
-            output = executable.transform_to_string(xdm_node=document)
-            report = ET.fromstring(output.encode('utf-8'))
+            try:
+                msg = error.xpath(".//svrl:text/text()",
+                                    namespaces=config.NS)[0]
+            except IndexError:
+                msg = ""
 
-            for error in report.xpath(".//svrl:failed-assert", namespaces=config.NS):
-                result["valid"] = "no"
-
-                if "location" in error.attrib.keys():
-                    location = error.attrib["location"]
-                else:
-                    location = ""
-
-                try:
-                    msg = error.xpath(".//svrl:text/text()",
-                                      namespaces=config.NS)[0]
-                except IndexError:
-                    msg = ""
-
-                result["errors"].append({
-                    "message": re.sub("\s+", " ", msg.strip()),
-                    "location": location
-                })
+            result["errors"].append({
+                "message": re.sub("\s+", " ", msg.strip()),
+                "location": location
+            })
 
     return result

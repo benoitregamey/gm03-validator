@@ -960,7 +960,14 @@
    </xsl:template>
    <xsl:template match="//gmd:MD_Metadata/gmd:hierarchyLevel|//*[@gco:isoType='gmd:MD_Metadata']/gmd:hierarchyLevel" mode="d5e502" priority="0">
       <xsl:variable name="hl" select="count(../gmd:hierarchyLevel/gmd:MD_ScopeCode[@codeListValue='dataset' or @codeListValue=''])=0 and     (not(../gmd:hierarchyLevelName) or ../gmd:hierarchyLevelName/@gco:nilReason)"/>
-      <xsl:variable name="resourceType" select="string-join(../gmd:hierarchyLevel/*/@codeListValue, ',')"/>
+      <xsl:variable name="resourceType">
+        <xsl:for-each select="../gmd:hierarchyLevel/*/@codeListValue">
+            <xsl:if test="position() > 1">
+                <xsl:text>,</xsl:text>
+            </xsl:if>
+            <xsl:value-of select="."/>
+        </xsl:for-each>
+      </xsl:variable>
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
          <xsl:attribute name="context">//gmd:MD_Metadata/gmd:hierarchyLevel|//*[@gco:isoType='gmd:MD_Metadata']/gmd:hierarchyLevel</xsl:attribute>
       </svrl:fired-rule>

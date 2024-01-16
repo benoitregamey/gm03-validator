@@ -87,9 +87,6 @@ GitHub.sublime-settings
 # Test files #
 test*/*
 
-# schxslt
-schxslt*/
-
 # Temporary files #
 
 # Elastic Beanstalk Files
